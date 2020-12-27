@@ -2,6 +2,7 @@
 WeaponShop - web site, created on python language with Django tecnology.
 App used MySQL, now working with PostgreSQL.
 In development used and realised:
+'''
 -basic objects(views, forms, urls routing, models)
 -CRUD methods
 -admin panel
@@ -10,3 +11,4 @@ In development used and realised:
 -jinja template
 -pytest(fixtures and parametrize)
 -logging
+'''
