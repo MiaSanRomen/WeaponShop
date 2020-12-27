@@ -1,5 +1,5 @@
 # WeaponShop
-WeaponShop - web site, created on python language with Django tecnology.
+##WeaponShop - web site, created on python language with Django tecnology.
 App used MySQL, now working with PostgreSQL.
 In development used and realised:
 ```
