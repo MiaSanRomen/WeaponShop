@@ -1,0 +1,37 @@
+{% extends 'weapon/base.html' %}
+{% load static %}
+{% block title %} {{ country.name }} {% endblock title %}
+{% block container %}
+    <div class="container py-md-3">
+{% endblock container %}
+
+{% block sidebar %}
+    <div class="side-bar col-lg-4">
+{% endblock sidebar %}
+
+{% block weapon %}
+    <div class="left-ads-display col-lg-8">
+        <div class="row">
+            <div class="desc1-left col-md-6">
+                <img src="{{ country.image.url }}" class="img-fluid" alt="">
+            </div>
+            <div class="desc1-right col-md-6 pl-lg-4">
+                <h3 class="editContent" style="outline: none; cursor: inherit;">
+                    {{ country.name }}
+                </h3>
+                <h5 class="editContent"></h5>
+                <ul>
+                    <li>
+                        <span><b>Произведено:</b>
+                            {% for weapon in country.weapon_set.all %}
+                                <a href="{{ weapon.get_absolute_url }}">
+                                {{ weapon.name }};
+                            </a>
+                            {% endfor %}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock weapon %}

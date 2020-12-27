@@ -1,0 +1,151 @@
+{% extends 'weapon/base.html' %}
+{% load static i18n%}
+{% block title %} {{ weapon.name }} {% endblock title %}
+{% block container %}
+    <div class="container py-md-3">
+{% endblock container %}
+
+{% block sidebar %}
+    <div class="side-bar col-lg-4">
+{% endblock sidebar %}
+
+{% block weapon %}
+    <div class="left-ads-display col-lg-8">
+        <div class="row">
+            <div class="desc1-left col-md-6">
+                <img src="{{ weapon.image.url }}" class="img-fluid" alt="">
+            </div>
+            <div class="desc1-right col-md-6 pl-lg-4">
+                <h3 class="editContent" style="outline: none; cursor: inherit;">
+                    {{ weapon.name }}
+                </h3>
+                <h5 class="editContent"></h5>
+                <ul>
+                    <li style="list-style: none">
+                        <span><b>Рыночная цена:</b> {{ weapon.price }}<b>$</b></span></li>
+                    <li style="list-style: none">
+                        <span><b>Описание:</b> {{ weapon.description }}</span>
+                    </li>
+                    <li style="list-style: none">
+                                    <span><b>Тип оружия:</b>
+                                        {% for type in weapon.typeWeapon.all %}
+                                            {{ type.name }}
+                                        {% endfor %}
+                                    </span>
+                    </li>
+                    <li style="list-style: none"><span><b>Страна:</b>
+                        {% for country in weapon.country.all %}
+                            <a href="{{ country.get_absolute_url }}">
+                                {{ country.name }}
+                            </a>
+                        {% endfor %}
+                      </span>
+                    </li>
+                    <li style="list-style: none"><span><b>Типы пуль:</b>
+                        {% for bullet in weapon.bullets.all %}
+                            {{ bullet.name }};
+                        {% endfor %}
+                                    </span>
+                    </li>
+                </ul>
+                <div class="share-desc">
+                    <div class="share">
+                        <h4 class="editContent"
+                            style="outline: none; cursor: inherit;">
+                            Share:</h4>
+                        <ul class="w3layouts_social_list list-unstyled">
+                            <li>
+                                <a href="#" class="w3pvt_facebook editContent"
+                                   style="outline: none; cursor: inherit;">
+                                                <span class="fa fa-facebook-f"
+                                                      style="outline: none; cursor: inherit;"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="w3pvt_twitter editContent"
+                                   style="outline: none; cursor: inherit;">
+                                                <span class="fa fa-twitter"
+                                                      style="outline: none; cursor: inherit;"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="w3pvt_dribble editContent"
+                                   style="outline: none; cursor: inherit;">
+                                                <span class="fa fa-dribbble"
+                                                      style="outline: none; cursor: inherit;"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row sub-para-w3layouts mt-5">
+
+            <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
+                Об оружии {{ weapon.name }}
+            </h3>
+            <p class="editContent" style="outline: none; cursor: inherit;">
+                {{ weapon.description }}
+            </p>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="single-form-left">
+                <!-- contact form grid -->
+                <div class="contact-single">
+                    <h3 class="editContent" style="outline: none; cursor: inherit;">
+                        <span class="sub-tittle editContent">{{ weapon.reviews_set.count }}</span>Оставить
+                        отзыв</h3>
+                    <form action="{% url 'add_review' weapon.id %}" method="post" class="mt-4">
+                        {% csrf_token %}
+                        <div class="form-group editContent">
+                            <label for="contactcomment" class="editContent">
+                                Ваш комментарий *
+                            </label>
+                            <textarea class="form-control border" rows="5" name="text"
+                                      id="contactcomment" required=""></textarea>
+                        </div>
+                        <div class="d-sm-flex">
+                            <div class="col-sm-6 form-group p-0 editContent">
+                                <label for="contactusername" class="editContent">
+                                    Имя *
+                                </label>
+                                <input type="text" class="form-control border" name="name"
+                                       id="contactusername" required="">
+                            </div>
+                            <div class="col-sm-6 form-group ml-sm-3 editContent"
+                                 style="outline: none; cursor: inherit;">
+                                <label for="contactemail" class="editContent">
+                                    Email *
+                                </label>
+                                <input type="email" class="form-control border" name="email"
+                                       id="contactemail" required="">
+                            </div>
+                        </div>
+                        <button type="submit"
+                                class="mt-3 btn btn-success btn-block py-3">
+                            Отправить
+                        </button>
+                    </form>
+                </div>
+                <!--  //contact form grid ends here -->
+            </div>
+        </div>
+        {% for review in weapon.reviews_set.all %}
+            <div class="media py-5">
+                <img src="{% static 'images/te2.jpg' %}" class="mr-3 img-fluid" alt="image">
+                <div class="media-body mt-4">
+                    <h5 class="mt-0 editContent">
+                        {{ review.name }}
+                    </h5>
+                    <p class="mt-2 editContent">
+                        {{ review.text }}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock weapon %}

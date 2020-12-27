@@ -1,0 +1,41 @@
+<div class="search-bar w3layouts-newsletter">
+    <h3 class="sear-head editContent">Поиск оружия</h3>
+    <form action="{% url 'search' %}" method="get" class="d-flex editContent">
+        <input type="search" placeholder="Введите название..." name="q"
+               class="form-control" required="">
+        <button class="btn1 btn" type="submit">
+            <span class="fa fa-search" aria-hidden="true"></span>
+        </button>
+    </form>
+</div>
+<!--preference -->
+
+<form action="{% url 'json_filter' %}" method="get" name="filter">
+    <div class="left-side my-4">
+        <h3 class="sear-head editContent">Типы оружия</h3>
+        <ul class="w3layouts-box-list">
+            {% for type in view.get_types %}
+                <li class="editContent">
+                    <input type="checkbox" class="checked" name="typeWeapon" value="{{ type.id }}">
+                    <span class="span editContent">{{ type.name }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- // preference -->
+    <!-- discounts -->
+
+    <div class="left-side">
+        <h3 class="sear-head editContent">Cтраны</h3>
+        <ul class="w3layouts-box-list">
+            {% for country in view.get_countries %}
+                <li class="editContent">
+                    <input type="checkbox" class="checked" name="country" value="{{ country.id }}">
+                    <span class="span editContent">{{ country.name }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <button type="submit">Найти</button>
+</form>
+<!-- //discounts -->
