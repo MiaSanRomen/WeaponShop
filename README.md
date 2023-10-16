@@ -12,3 +12,4 @@ In development used and realised:
 -pytest(fixtures and parametrize)
 -logging
 ```
+- Done in 2020
